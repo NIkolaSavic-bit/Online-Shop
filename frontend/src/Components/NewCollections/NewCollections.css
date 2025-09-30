@@ -6,23 +6,48 @@
   height: auto;
   margin-bottom: 50px;
 }
+
 .new-collections h1 {
   color: #171717;
   font-size: 50px;
   font-weight: 600;
 }
+
 .new-collections hr {
   width: 200px;
   height: 10px;
   border-radius: 5px;
   background: #252525;
 }
+
 .collections {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
   margin-top: 50px;
+  width: 100%;
 }
+
 .collections:hover {
   cursor: pointer;
 }
+
+.swiper {
+  width: 100%;
+  padding-bottom: 40px;
+  overflow: hidden;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 1s ease-in-out;
+}
+
+.item img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.5s ease-in-out;
+}
+
