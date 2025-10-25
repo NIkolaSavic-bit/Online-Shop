@@ -36,16 +36,15 @@ function App() {
             element={<ShopCategory banner={kids_banner} category="kid" />}
           />
           <Route>
-            <Route path="/product" element={<Product />} />
-            <Route path=":productId" elelment={<Product />} />
+            <Route path="/product/:productId" element={<Product />} />
           </Route>
           <Route path="/cart" element={<Cart />} />
           <Route path="/Login" element={<LoginSignup />} />
           <Route path="/Company" element={<Company />} />
           <Route path="/Products" element={<Products />}></Route>
           <Route path="/Contact" element={<Contact />}></Route>
-           <Route path="/About" element={<About />}></Route>
-           <Route path="/Offices" element={<Offices />}></Route>
+          <Route path="/About" element={<About />}></Route>
+          <Route path="/Offices" element={<Offices />}></Route>
         </Routes>
         <Footer />
       </BrowserRouter>
