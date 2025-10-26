@@ -28,6 +28,7 @@ const NewCollections = () => {
               <Item
                 image={item.image}
                 id={item.id}
+                
                 name={item.name}
                 new_price={item.new_price + " $"}
                 old_price={item.old_price + " $"}
