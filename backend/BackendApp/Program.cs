@@ -1,19 +1,47 @@
+using BackendApp.Data;
+using BackendApp.Services;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+// Add services to the container
 builder.Services.AddOpenApi();
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+);
+builder.Services.AddScoped<AuthService>();
+builder.Services.AddControllers();
+
+// Enable CORS with credentials
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReactApp",
+        policyBuilder =>
+        {
+            policyBuilder
+                .WithOrigins("http://localhost:3000") // frontend URL
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials(); // important when using withCredentials in Axios
+        });
+});
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Enable CORS **before** other middleware
+app.UseCors("AllowReactApp");
+
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
 
+// HTTPS redirection should come after CORS
 app.UseHttpsRedirection();
 
+app.MapControllers();
+
+// Sample weather endpoint
 var summaries = new[]
 {
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
@@ -21,7 +49,7 @@ var summaries = new[]
 
 app.MapGet("/weatherforecast", () =>
 {
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
+    var forecast = Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast
         (
             DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
