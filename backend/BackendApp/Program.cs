@@ -19,10 +19,10 @@ builder.Services.AddCors(options =>
         policyBuilder =>
         {
             policyBuilder
-                .WithOrigins("http://localhost:3000") // frontend URL
+                .WithOrigins("http://localhost:3000")
                 .AllowAnyHeader()
                 .AllowAnyMethod()
-                .AllowCredentials(); // important when using withCredentials in Axios
+                .AllowCredentials();
         });
 });
 
@@ -35,28 +35,39 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
-
-// HTTPS redirection should come after CORS
-app.UseHttpsRedirection();
-
-app.MapControllers();
-
-// Sample weather endpoint
-var summaries = new[]
+app.UseStaticFiles();
+// 🔹 OVDJE DODAJ SEED POZIV 🔹
+using (var scope = app.Services.CreateScope())
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<AppDbContext>();
+
+    // Automatska migracija
+    context.Database.Migrate();
+
+    // Ubacivanje proizvoda ako ih nema
+    SeedData.Initialize(context);
+}
+// 🔹 KRAJ SEED POZIVA 🔹
+
+app.UseHttpsRedirection();
+app.MapControllers();
 
 app.MapGet("/weatherforecast", () =>
 {
+    var summaries = new[]
+    {
+        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+    };
+
     var forecast = Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast
         (
             DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
             Random.Shared.Next(-20, 55),
             summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
+        )).ToArray();
+
     return forecast;
 })
 .WithName("GetWeatherForecast");

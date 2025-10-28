@@ -1,5 +1,6 @@
 using BackendApp.Data;
 using BackendApp.Models;
+using BackendApp.Services;
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.EntityFrameworkCore;

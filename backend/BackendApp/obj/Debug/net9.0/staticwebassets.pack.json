@@ -1,0 +1,189 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\p1_product.png",
+      "PackagePath": "staticwebassets\\images\\p1_product.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\p1_product_i1.png",
+      "PackagePath": "staticwebassets\\images\\p1_product_i1.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\p1_product_i2.png",
+      "PackagePath": "staticwebassets\\images\\p1_product_i2.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\p1_product_i3.png",
+      "PackagePath": "staticwebassets\\images\\p1_product_i3.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\p1_product_i4.png",
+      "PackagePath": "staticwebassets\\images\\p1_product_i4.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\product_1.png",
+      "PackagePath": "staticwebassets\\images\\product_1.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\product_10.png",
+      "PackagePath": "staticwebassets\\images\\product_10.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\product_11.png",
+      "PackagePath": "staticwebassets\\images\\product_11.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\product_12.png",
+      "PackagePath": "staticwebassets\\images\\product_12.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\product_13.png",
+      "PackagePath": "staticwebassets\\images\\product_13.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\product_14.png",
+      "PackagePath": "staticwebassets\\images\\product_14.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\product_15.png",
+      "PackagePath": "staticwebassets\\images\\product_15.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\product_16.png",
+      "PackagePath": "staticwebassets\\images\\product_16.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\product_17.png",
+      "PackagePath": "staticwebassets\\images\\product_17.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\product_18.png",
+      "PackagePath": "staticwebassets\\images\\product_18.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\product_19.png",
+      "PackagePath": "staticwebassets\\images\\product_19.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\product_2.png",
+      "PackagePath": "staticwebassets\\images\\product_2.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\product_20.png",
+      "PackagePath": "staticwebassets\\images\\product_20.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\product_21.png",
+      "PackagePath": "staticwebassets\\images\\product_21.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\product_22.png",
+      "PackagePath": "staticwebassets\\images\\product_22.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\product_23.png",
+      "PackagePath": "staticwebassets\\images\\product_23.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\product_24.png",
+      "PackagePath": "staticwebassets\\images\\product_24.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\product_25.png",
+      "PackagePath": "staticwebassets\\images\\product_25.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\product_26.png",
+      "PackagePath": "staticwebassets\\images\\product_26.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\product_27.png",
+      "PackagePath": "staticwebassets\\images\\product_27.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\product_28.png",
+      "PackagePath": "staticwebassets\\images\\product_28.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\product_29.png",
+      "PackagePath": "staticwebassets\\images\\product_29.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\product_3.png",
+      "PackagePath": "staticwebassets\\images\\product_3.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\product_30.png",
+      "PackagePath": "staticwebassets\\images\\product_30.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\product_31.png",
+      "PackagePath": "staticwebassets\\images\\product_31.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\product_32.png",
+      "PackagePath": "staticwebassets\\images\\product_32.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\product_33.png",
+      "PackagePath": "staticwebassets\\images\\product_33.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\product_34.png",
+      "PackagePath": "staticwebassets\\images\\product_34.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\product_35.png",
+      "PackagePath": "staticwebassets\\images\\product_35.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\product_36.png",
+      "PackagePath": "staticwebassets\\images\\product_36.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\product_4.png",
+      "PackagePath": "staticwebassets\\images\\product_4.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\product_5.png",
+      "PackagePath": "staticwebassets\\images\\product_5.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\product_6.png",
+      "PackagePath": "staticwebassets\\images\\product_6.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\product_7.png",
+      "PackagePath": "staticwebassets\\images\\product_7.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\product_8.png",
+      "PackagePath": "staticwebassets\\images\\product_8.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\product_9.png",
+      "PackagePath": "staticwebassets\\images\\product_9.png"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.BackendApp.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.BackendApp.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.build.BackendApp.props",
+      "PackagePath": "build\\BackendApp.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildMultiTargeting.BackendApp.props",
+      "PackagePath": "buildMultiTargeting\\BackendApp.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildTransitive.BackendApp.props",
+      "PackagePath": "buildTransitive\\BackendApp.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

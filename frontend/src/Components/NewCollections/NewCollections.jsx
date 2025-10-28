@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./NewCollections.css";
-import new_collections from "../Assets/new_collections";
 import Item from "../Items/Item";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Autoplay } from "swiper/modules";
 
 const NewCollections = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5145/api/products")
+      .then((res) => res.json())
+      .then((data) => setProducts(data))
+      .catch((err) => console.error(err));
+  }, []);
+
   return (
     <div className="new-collections">
       <h1>New Collections</h1>
@@ -16,25 +24,28 @@ const NewCollections = () => {
           modules={[Autoplay]}
           spaceBetween={20}
           slidesPerView={4}
-          loop={true} 
+          loop={true}
           autoplay={{
-            delay: 3000, 
-            disableOnInteraction: false, 
+            delay: 3000,
+            disableOnInteraction: false,
           }}
           grabCursor={true}
         >
-          {new_collections.map((item, index) => (
-            <SwiperSlide key={index}>
-              <Item
-                image={item.image}
-                id={item.id}
-                
-                name={item.name}
-                new_price={item.new_price + " $"}
-                old_price={item.old_price + " $"}
-              />
-            </SwiperSlide>
-          ))}
+          {products
+             .sort(() => 0.5 - Math.random())
+             .slice(0, 10)
+            .map((item) => (
+              <SwiperSlide key={item.id}>
+                <Item
+                  key={item.id}
+                  image={`http://localhost:5145${item.image}`}
+                  id={item.id}
+                  name={item.name}
+                  new_price={item.newPrice + " $"}
+                  old_price={item.oldPrice + " $"}
+                />
+              </SwiperSlide>
+            ))}
         </Swiper>
       </div>
     </div>
