@@ -8,5 +8,8 @@ namespace BackendApp.Models
         public string Image { get; set; } = string.Empty;
         public decimal NewPrice { get; set; }
         public decimal OldPrice { get; set; }
+
+        //isti id za slike
+       
     }
 }

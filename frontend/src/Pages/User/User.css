@@ -1,0 +1,41 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.user_page,
+.cart_products,
+.cart_items,
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+  font-weight: 200;
+}
+
+.user_mail,
+.user_name {
+  font-size: 26px;
+  font-weight: 200;
+  padding-bottom: 10px;
+}
+
+.user_mail strong,
+.user_name strong {
+  padding-left: 20px;
+  font-weight: 600;
+}
+
+.cart_products {
+  font-size: 40px;
+}
+
+.cart_items {
+  font-weight: 400;
+  font-size: 30px;
+}

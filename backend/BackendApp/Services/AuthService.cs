@@ -37,5 +37,10 @@ namespace BackendApp.Services
 			return await _context.Users
 				.FirstOrDefaultAsync(u => u.Email == email && u.PasswordHash == hash);
 		}
+		public async Task<User> GetUserById(int id)
+		{
+			return await _context.Users.FindAsync(id);
+		}
+
 	}
 }

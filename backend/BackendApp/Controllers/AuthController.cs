@@ -35,7 +35,19 @@ namespace BackendApp.Controllers
 		{
 			var user = await _authService.Authenticate(dto.Email, dto.Password);
 			if (user == null) return BadRequest("Invalid email or password.");
-			return Ok(new { message = "Login successful" });
+			//da vraca token
+			return Ok(new { message = "Login successful", userId = user.Id });
 		}
+
+		[HttpGet("{id}")]
+		public async Task<IActionResult> GetUser(int id)
+		{
+			var user = await _authService.GetUserById(id);
+			if (user == null)
+				return NotFound("User not found");
+
+			return Ok(new { id = user.Id, name = user.Name, email = user.Email });
+		}
+
 	}
 }

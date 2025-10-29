@@ -16,9 +16,13 @@ import Contact from "./Components/Footer/Footer-Text/Contact.jsx";
 import About from "./Components/Footer/Footer-Text/About.jsx";
 import Offices from "./Components/Footer/Footer-Text/Offices.jsx";
 
+// **Importuj AuthProvider**
+import { AuthProvider } from "./Context/AuthContext.jsx";
+import User from "./Pages/User/User.jsx";
+
 function App() {
   return (
-    <div>
+    <AuthProvider>
       <BrowserRouter>
         <Navbar />
         <Routes>
@@ -35,20 +39,20 @@ function App() {
             path="/kids"
             element={<ShopCategory banner={kids_banner} category="kid" />}
           />
-          <Route>
-            <Route path="/product/:productId" element={<Product />} />
-          </Route>
+          <Route path="/product/:productId" element={<Product />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/Login" element={<LoginSignup />} />
-          <Route path="/Company" element={<Company />} />
-          <Route path="/Products" element={<Products />}></Route>
-          <Route path="/Contact" element={<Contact />}></Route>
-          <Route path="/About" element={<About />}></Route>
-          <Route path="/Offices" element={<Offices />}></Route>
+          <Route path="/login" element={<LoginSignup />} />
+          <Route path="/company" element={<Company />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/offices" element={<Offices />} />
+          <Route path="/user" element={<User />} />
         </Routes>
         <Footer />
       </BrowserRouter>
-    </div>
+    </AuthProvider>
   );
 }
+
 export default App;

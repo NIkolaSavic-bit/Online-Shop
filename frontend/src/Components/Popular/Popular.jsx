@@ -7,7 +7,7 @@ function Popular() {
 
   useEffect(() => {
     // poziv API-ja
-    fetch("http://localhost:5145/api/products/women")
+    fetch("http://localhost:5145/api/products/category/women")
       .then((res) => res.json())
       .then((data) => setProducts(data))
       .catch((err) => console.error(err));

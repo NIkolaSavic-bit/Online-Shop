@@ -1,19 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./ProductDisplay.css";
 import star_icon from "../Assets/star_icon.png";
 import star_dull_icon from "../Assets/star_dull_icon.png";
+import { useParams } from "react-router-dom";
 const ProductDisplay = (props) => {
-  const { product } = props;
-  const [mainImage, setMainImage] = React.useState(product.image);
+  const { productId } = useParams();
+  const [product, setProduct] = useState();
+  const [mainImage, setMainImage] = useState("");
+
+  useEffect(() => {
+    fetch(`http://localhost:5145/api/products/${productId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setProduct(data);
+        setMainImage(`http://localhost:5145${data.image}`);
+      })
+      .catch((err) => console.error("Greska pri dohvatu proizvoda:", err));
+  }, [productId]);
+
   if (!product) {
-    return <div className="product_display_loading">Loading product...</div>;
+    return <div>Loading...</div>;
   }
+
   const thumbnails = [
-    product.image,
-    "https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1169",
-    product.image,
-    product.image,
-    product.image,
+    `http://localhost:5145${product.image}`,
+    `http://localhost:5145${product.image}`,
+    `http://localhost:5145${product.image}`,
+    `http://localhost:5145${product.image}`,
   ];
 
   return (
@@ -45,8 +58,8 @@ const ProductDisplay = (props) => {
           <p>(122)</p>
         </div>
         <div className="product_display_right_prices">
-          <div className="old_price">${product.old_price}</div>
-          <div className="new_price">${product.new_price}</div>
+          <div className="old_price">${product.oldPrice}</div>
+          <div className="new_price">${product.newPrice}</div>
         </div>
         <div className="product_display_right_description">
           Nesto o: {product.name}
