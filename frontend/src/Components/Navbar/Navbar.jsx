@@ -1,14 +1,21 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "..//../Context/AuthContext";
 import "./Navbar.css";
 import logo from "../Assets/logo.png";
 import cart_icon from "../Assets/cart_icon.png";
 import { CiUser } from "react-icons/ci";
+import axios from "axios";
+import {useCart} from "../../Context/CartContext";
+
 const Navbar = () => {
   const [menu, setMenu] = useState("shop");
   const { userId, logout } = useContext(AuthContext);
   const navigate = useNavigate();
+  const {cartCount}=useCart();
+  
+
+
 
   return (
     <div className="navbar">
@@ -63,7 +70,7 @@ const Navbar = () => {
         <Link to="/cart" style={{ textDecoration: "none", color: "black" }}>
           <img src={cart_icon} alt="" />
         </Link>
-        <div className="nav-cart-count">0</div>
+        <div className="nav-cart-count">{cartCount}</div>
         <div className="user">
           <CiUser
             size={40}

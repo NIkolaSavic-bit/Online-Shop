@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace BackendApp.Models
 {
@@ -10,15 +11,19 @@ namespace BackendApp.Models
 
         //veza sa proizvodom
         public int ProductId { get; set; }
+
         [ForeignKey("ProductId")]
-        public Product Product { get; set; }
+        
+        public virtual Product? Product { get; set; }
 
         public int Quantity { get; set; }
 
         //veza sa korisnikom
         public int UserId { get; set; }
+
         [ForeignKey("UserId")]
-        public User User { get; set; }
+        
+        public virtual User? User { get; set; }
 
     }
 }

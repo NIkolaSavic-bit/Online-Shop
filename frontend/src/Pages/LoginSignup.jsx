@@ -171,7 +171,7 @@ const LoginSignup = () => {
             <button className="button-continue" onClick={handleLogin}>
               Login
             </button>
-            {loginMessage && <p className="login-message">{loginMessage}</p>}
+            {loginMessage && <p className="login-message" style={{color:"red"}}>{loginMessage}</p>}
 
             <p className="login-signup-login">
               Don’t have an account?{" "}

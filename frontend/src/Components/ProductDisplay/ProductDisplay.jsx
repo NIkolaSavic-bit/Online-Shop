@@ -1,12 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./ProductDisplay.css";
 import star_icon from "../Assets/star_icon.png";
 import star_dull_icon from "../Assets/star_dull_icon.png";
 import { useParams } from "react-router-dom";
+import { AuthContext } from "../../Context/AuthContext";
+import { useCart } from "../../Context/CartContext";
+
 const ProductDisplay = (props) => {
+  const { fetchCartCount } = useCart();
   const { productId } = useParams();
   const [product, setProduct] = useState();
   const [mainImage, setMainImage] = useState("");
+  //uzimamo korisnika
+  const { userId } = useContext(AuthContext);
 
   useEffect(() => {
     fetch(`http://localhost:5145/api/products/${productId}`)
@@ -15,7 +21,7 @@ const ProductDisplay = (props) => {
         setProduct(data);
         setMainImage(`http://localhost:5145${data.image}`);
       })
-      .catch((err) => console.error("Greska pri dohvatu proizvoda:", err));
+      .catch((err) => console.error("Greska pri ucitavnanju proizvoda:", err));
   }, [productId]);
 
   if (!product) {
@@ -28,6 +34,36 @@ const ProductDisplay = (props) => {
     `http://localhost:5145${product.image}`,
     `http://localhost:5145${product.image}`,
   ];
+
+  const handleAddToCart = async () => {
+    if (!userId) {
+      alert("Morate biti prijavljeni da dodate proizvod u korpu.");
+      return;
+    }
+    try {
+      const res = await fetch(`http://localhost:5145/api/cart/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: Number(userId),
+          productId: product.id,
+          quantity: 1,
+        }),
+      });
+      if (!res.ok) throw new Error("Neuspešno dodavanje proizvoda");
+
+      fetchCartCount();
+
+      alert("Proizvod dodat u korpu.");
+      console.log("Proizvod dodat u korpu:", res);
+    } catch (err) {
+      console.error("Greska pri dodavanju proizvoda u korpu:", err);
+
+      alert("Greska pri dodavanju proizvoda u korpu.");
+    }
+  };
 
   return (
     <div className="product_display">
@@ -65,7 +101,7 @@ const ProductDisplay = (props) => {
           Nesto o: {product.name}
         </div>
         <div className="product_display_right_size">
-          <h1>Select Size</h1>
+          <h1>Odaberite velicinu</h1>
           <div className="product_display_sizes">
             <div>L</div>
             <div>M</div>
@@ -74,13 +110,13 @@ const ProductDisplay = (props) => {
           </div>
         </div>
         <div className="add_to_cart_button">
-          <button>Add to cart</button>
+          <button onClick={handleAddToCart}>Dodaj u korpu</button>
         </div>
         <p className="product_category">
-          <span>Category:</span>Women, T-shirt
+          <span>Kategorija: </span>Women, T-shirt
         </p>
         <p className="product_category">
-          <span>Tags: </span>Moder, Latest
+          <span>Tagovi: </span>Moder, Latest
         </p>
       </div>
     </div>

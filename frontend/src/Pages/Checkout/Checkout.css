@@ -1,0 +1,31 @@
+.checkout_container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+}
+.checkout_container h2 {
+  font-size: 30px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 20px;
+}
+.total_price {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 0 40px 20px 0;
+}
+.payment {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.payment button {
+  width: 20%;
+}
