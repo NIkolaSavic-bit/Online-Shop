@@ -16,18 +16,35 @@ namespace BackendApp.Controllers
         {
             _context = context;
         }
-
+        //da mogu da pristupim korpi korisnika
         [HttpGet("{userId}")]
         public async Task<IActionResult> GetCart(int userId)
         {
             var cart = await _context.CartItems
-                .Include(c => c.Product)
-                .Where(c => c.UserId == userId)
+        .Include(c => c.Product)
+        .Where(c => c.UserId == userId)
+        .Select(c => new
+        {
+            c.Id,
+            c.Quantity,
+            c.ProductId,
+            Product = new
+            {
+                c.Product.Id,
+                c.Product.Name,
+                c.Product.Category,
+                c.Product.Image,
+                c.Product.NewPrice,
+                c.Product.OldPrice
+            }
+        })
+
                 .ToListAsync();
 
             return Ok(cart);
         }
 
+        //dodaje producte u cart
         [HttpPost]
         public async Task<IActionResult> AddToCart([FromBody] CartItem item)
         {
@@ -48,6 +65,7 @@ namespace BackendApp.Controllers
             return Ok(item);
         }
 
+        //uklanja product iz cart
         [HttpDelete("{id}")]
         public async Task<IActionResult> RemoveFromCart(int id)
         {

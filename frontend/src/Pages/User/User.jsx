@@ -13,7 +13,7 @@ const User = () => {
   useEffect(() => {
     if (!userId) return;
 
-    // Primer: dohvati korisnika i korpu sa backend-a
+    // dohvati korisnika i korpu sa backend-a
     const fetchUserData = async () => {
       try {
         const userRes = await axios.get(
@@ -22,13 +22,19 @@ const User = () => {
         setUserEmail(userRes.data.email);
         const email = userRes.data.email;
         const name = email.split("@")[0];
-        const formatName= name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+        //cisti brojeve
+        const clean = name.replace(/[0-9]/g, "");
+        //deli ime ako na dva ako je razdvojeno tackom ili donjom crtom
+        const parts = clean.split(/[ ._]/);
+        const formatName = parts
+          .map((p) => p.charAt(0).toUpperCase() + p.slice(1))
+          .join(" ");
         setName(formatName);
 
         const cartRes = await axios.get(
           `http://localhost:5145/api/cart/${userId}`
         );
-        setCartProducts(cartRes.data.products); // pretpostavljamo da backend vraća products
+        setCartProducts(cartRes.data);
       } catch (err) {
         console.error("Error fetching user data:", err);
       }
@@ -38,7 +44,11 @@ const User = () => {
   }, [userId]);
 
   if (!userId) {
-    return <p className="error" style={{fontSize:"30px", height:"100vh"}}>Morate biti prijavljeni da bi videli stranicu.</p>;
+    return (
+      <p className="error" style={{ fontSize: "30px", height: "100vh" }}>
+        Morate biti prijavljeni da bi videli korisnicki nalog.
+      </p>
+    );
   }
 
   return (
@@ -52,15 +62,21 @@ const User = () => {
       </p>
 
       <h2 className="cart_products">Proizvodi u korpi</h2>
-      
+
       <hr />
       {!cartProducts || cartProducts.length === 0 ? (
         <p className="cart_items">Korpa je prazna</p>
       ) : (
         <ul>
-          {cartProducts.map((product) => (
-            <li key={product.id}>
-              {product.name} - ${product.newPrice}
+          {cartProducts.map((item) => (
+            <li key={item.id}>
+              <img
+                src={`http://localhost:5145${item.product.image}`}
+                alt="Loading image...."
+               
+              />
+              {item.product.name} - ${item.product.newPrice} (Količina:{" "}
+              {item.quantity})
             </li>
           ))}
         </ul>
