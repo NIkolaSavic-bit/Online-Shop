@@ -15,9 +15,6 @@ const Product = () => {
     console.log("Proizvod nije pronađen za ID:", productId);
     return <div>Proizvod nije pronađen</div>;
   }
-  console.log("Svi proizvodi:", all_product);
-  console.log("productId iz URL-a:", productId);
-  console.log("Pronađeni product:", product);
   return (
     <div>
       <BreadCrum product={product} />

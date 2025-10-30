@@ -30,12 +30,15 @@ const Footer = () => {
             Products
           </Link>
         </li>
-        <li>  <Link
+        <li>
+          {" "}
+          <Link
             to="/Offices"
             style={{ color: "black", textDecoration: "none" }}
           >
             Offices
-          </Link></li>
+          </Link>
+        </li>
         <li>
           {" "}
           <Link to="/About" style={{ color: "black", textDecoration: "none" }}>

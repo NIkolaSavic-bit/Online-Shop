@@ -4,6 +4,7 @@ import Item from "../Items/Item";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Autoplay } from "swiper/modules";
+import { useNavigate } from "react-router-dom";
 
 const NewCollections = () => {
   const [products, setProducts] = useState([]);
@@ -32,8 +33,8 @@ const NewCollections = () => {
           grabCursor={true}
         >
           {products
-             .sort(() => 0.5 - Math.random())
-             .slice(0, 10)
+            .sort(() => 0.5 - Math.random())
+            .slice(0, 10)
             .map((item) => (
               <SwiperSlide key={item.id}>
                 <Item

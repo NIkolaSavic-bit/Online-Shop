@@ -1,10 +1,6 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\p1_product copy.png",
-      "PackagePath": "staticwebassets\\images\\p1_product copy.png"
-    },
-    {
       "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\p1_product.png",
       "PackagePath": "staticwebassets\\images\\p1_product.png"
     },
@@ -13,28 +9,12 @@
       "PackagePath": "staticwebassets\\images\\p1_product_i1.png"
     },
     {
-      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\p1_product_i1_copy.png",
-      "PackagePath": "staticwebassets\\images\\p1_product_i1_copy.png"
-    },
-    {
-      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\p1_product_i2 copy.png",
-      "PackagePath": "staticwebassets\\images\\p1_product_i2 copy.png"
-    },
-    {
       "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\p1_product_i2.png",
       "PackagePath": "staticwebassets\\images\\p1_product_i2.png"
     },
     {
-      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\p1_product_i3 copy.png",
-      "PackagePath": "staticwebassets\\images\\p1_product_i3 copy.png"
-    },
-    {
       "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\p1_product_i3.png",
       "PackagePath": "staticwebassets\\images\\p1_product_i3.png"
-    },
-    {
-      "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\p1_product_i4 copy.png",
-      "PackagePath": "staticwebassets\\images\\p1_product_i4 copy.png"
     },
     {
       "Id": "C:\\Users\\User\\Project-Frontend\\backend\\BackendApp\\wwwroot\\images\\p1_product_i4.png",
