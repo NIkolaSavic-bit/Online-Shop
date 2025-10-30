@@ -58,13 +58,8 @@ const ShopCategory = (props) => {
         })}
       </div>
       {visibleProductsCount < filterProducts.length && (
-        <button
-          className="loading-more"
-          onClick={handleLoadMore}
-          onMouseEnter={() => setHover(false)}
-          onMouseLeave={() => setHover(true)}
-        >
-          {hover ? "Explore more" : "In progress..."}
+        <button className="loading-more" onClick={handleLoadMore}>
+          Explore more
         </button>
       )}
     </div>

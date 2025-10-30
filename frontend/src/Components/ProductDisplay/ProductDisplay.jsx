@@ -23,7 +23,7 @@ const ProductDisplay = (props) => {
       })
       .catch((err) => console.error("Greska pri ucitavnanju proizvoda:", err));
   }, [productId]);
-
+  
   if (!product) {
     return <div>Loading...</div>;
   }
