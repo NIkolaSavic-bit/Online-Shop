@@ -328,3 +328,6 @@ C:\Users\User\Project-Frontend\backend\BackendApp\obj\Debug\net9.0\BackendApp.pd
 C:\Users\User\Project-Frontend\backend\BackendApp\obj\Debug\net9.0\BackendApp.genruntimeconfig.cache
 C:\Users\User\Project-Frontend\backend\BackendApp\obj\Debug\net9.0\ref\BackendApp.dll
 C:\Users\User\Project-Frontend\backend\BackendApp\bin\Debug\net9.0\BackendApp.staticwebassets.runtime.json
+C:\Users\User\Project-Frontend\backend\BackendApp\bin\Debug\net9.0\BouncyCastle.Cryptography.dll
+C:\Users\User\Project-Frontend\backend\BackendApp\bin\Debug\net9.0\MailKit.dll
+C:\Users\User\Project-Frontend\backend\BackendApp\bin\Debug\net9.0\MimeKit.dll

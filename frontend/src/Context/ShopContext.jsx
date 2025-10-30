@@ -1,9 +1,17 @@
-import React, { createContext } from "react";
-import all_product from "../Components/Assets/all_product";
+import React, { createContext, useEffect, useState } from "react";
 
 export const ShopContext = createContext(null);
 
 const ShopContextProvider = (props) => {
+  const [all_product, setAllProduct] = useState([]);
+
+  useEffect(() => {
+    fetch(`http://localhost:5145/api/products`)
+      .then((res) => res.json())
+      .then((data) => setAllProduct(data))
+      .catch((err) => console.error("Greska! ", err));
+  }, []);
+
   const contextValue = { all_product };
 
   return (
