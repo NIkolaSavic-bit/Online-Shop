@@ -6,16 +6,13 @@ import logo from "../Assets/logo.png";
 import cart_icon from "../Assets/cart_icon.png";
 import { CiUser } from "react-icons/ci";
 import axios from "axios";
-import {useCart} from "../../Context/CartContext";
+import { useCart } from "../../Context/CartContext";
 
 const Navbar = () => {
   const [menu, setMenu] = useState("shop");
   const { userId, logout } = useContext(AuthContext);
   const navigate = useNavigate();
-  const {cartCount}=useCart();
-  
-
-
+  const { cartCount } = useCart();
 
   return (
     <div className="navbar">
@@ -31,25 +28,25 @@ const Navbar = () => {
           <Link to="/" style={{ textDecoration: "none", color: "black" }}>
             Shop
           </Link>
-          {menu === "shop" && <hr />}
+          {menu === "shop"}
         </li>
         <li onClick={() => setMenu("mens")}>
           <Link to="/mens" style={{ textDecoration: "none", color: "black" }}>
             Men
           </Link>
-          {menu === "mens" && <hr />}
+          {menu === "mens" }
         </li>
         <li onClick={() => setMenu("womens")}>
           <Link to="/womens" style={{ textDecoration: "none", color: "black" }}>
             Women
           </Link>
-          {menu === "womens" && <hr />}
+          {menu === "womens" }
         </li>
         <li onClick={() => setMenu("kids")}>
           <Link to="/kids" style={{ textDecoration: "none", color: "black" }}>
             Kids
           </Link>
-          {menu === "kids" && <hr />}
+          {menu === "kids" }
         </li>
       </ul>
 
