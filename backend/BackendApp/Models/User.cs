@@ -7,7 +7,14 @@ namespace BackendApp.Models
         public string Email { get; set; }
         public string PasswordHash { get; set; }
 
+        public bool IsEmailConfirmed { get; set; } = false;
+
+        public string? EmailVerificationToken { get; set; }
+
+        public bool IsAdmin { get; set; } = false;
         //1 korisnik moze imati vise stavki u korpi
         public ICollection<CartItem>? CartItems { get; set; }
+        public ICollection<Product> Products { get; set; } = new List<Product>();
+
     }
 }

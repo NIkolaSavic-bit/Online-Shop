@@ -4,7 +4,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext.jsx";
 
-
 const LoginSignup = () => {
   const [isLogin, setIsLogin] = useState(false);
 
@@ -61,7 +60,7 @@ const LoginSignup = () => {
       console.log(res.data);
       setLoginMessage(res.data.message);
       if (res.data.message === "Login successful") {
-        login(res.data.userId); // pozivamo login iz AuthContext-a
+        login(res.data.userId, res.data.isAdmin); // pozivamo login iz AuthContext-a
         navigate("/"); // redirect to home page
       }
     } catch (err) {
@@ -171,7 +170,11 @@ const LoginSignup = () => {
             <button className="button-continue" onClick={handleLogin}>
               Login
             </button>
-            {loginMessage && <p className="login-message" style={{color:"red"}}>{loginMessage}</p>}
+            {loginMessage && (
+              <p className="login-message" style={{ color: "red" }}>
+                {loginMessage}
+              </p>
+            )}
 
             <p className="login-signup-login">
               Don’t have an account?{" "}

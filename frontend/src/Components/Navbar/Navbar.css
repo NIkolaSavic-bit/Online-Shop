@@ -28,15 +28,15 @@
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
-.nav-menu hr{
-    width: 100%;
-    border: none;
-    height: 3px;
-    border-radius: 10px;
-    background: red;
+.nav-menu hr {
+  width: 100%;
+  border: none;
+  height: 3px;
+  border-radius: 10px;
+  background: red;
 }
 .nav-menu li:hover {
-   transform: translateY(-1.6px);
+  transform: translateY(-1.6px);
 }
 .nav-login-cart {
   display: flex;
@@ -60,4 +60,16 @@
   background-color: red;
   color: white;
 }
+.add-product-btn {
+  padding: 8px 14px;
+  margin-right: 10px;
+  border-radius: 6px;
+  border: none;
+  background-color: #28a745;
+  color: white;
+  cursor: pointer;
+}
 
+.add-product-btn:hover {
+  background-color: #218838;
+}

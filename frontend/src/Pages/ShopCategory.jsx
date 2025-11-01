@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./CSS/ShopCategory.css";
-import { ShopContext } from "../Context/ShopContext";
 import dropdown_icon from "../Components/Assets/dropdown_icon.png";
 import Item from "../Components/Items/Item";
 
@@ -49,7 +48,11 @@ const ShopCategory = (props) => {
             <Item
               key={item.id}
               id={item.id}
-              image={`http://localhost:5145${item.image}`}
+              image={
+                item.images?.length > 0
+                  ? `http://localhost:5145${item.images[0]}`
+                  : "/placeholder.jpg"
+              }
               name={item.name}
               new_price={item.newPrice + " $"}
               old_price={item.oldPrice + " $"}
