@@ -4,7 +4,6 @@ import Item from "../Items/Item";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Autoplay } from "swiper/modules";
-import { useNavigate } from "react-router-dom";
 
 const NewCollections = () => {
   const [products, setProducts] = useState([]);
@@ -27,7 +26,7 @@ const NewCollections = () => {
           slidesPerView={4}
           loop={true}
           autoplay={{
-            delay: 3000,
+            delay: 2000,
             disableOnInteraction: false,
           }}
           grabCursor={true}
