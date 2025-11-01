@@ -10,7 +10,15 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 builder.Services.AddScoped<AuthService>();
-builder.Services.AddControllers();
+builder.Services.AddScoped<EmailService>();
+builder.Services.AddScoped<ImageService>();
+builder.Services.AddControllers()
+.AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+        options.JsonSerializerOptions.WriteIndented = true; // po želji za lepši JSON
+    });
+
 
 // Enable CORS with credentials
 builder.Services.AddCors(options =>
@@ -41,12 +49,13 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<AppDbContext>();
+    AdminSeeder.SeedAdmin(context);
 
     // Automatska migracija
     context.Database.Migrate();
 
     // Ubacivanje proizvoda ako ih nema
-    SeedData.Initialize(context);
+    // SeedData.Initialize(context);
 }
 // 🔹 KRAJ SEED POZIVA 🔹
 

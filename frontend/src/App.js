@@ -21,6 +21,7 @@ import { AuthProvider } from "./Context/AuthContext.jsx";
 import { CartProvider } from "./Context/CartContext.jsx";
 import User from "./Pages/User/User.jsx";
 import Checkout from "./Pages/Checkout/Checkout.jsx";
+import AddProduct from "./Pages/AddProduct/AddProduct.jsx";
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
             <Route path="/offices" element={<Offices />} />
             <Route path="/user" element={<User />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/add-product" element={<AddProduct />} />
           </Routes>
           <Footer />
         </BrowserRouter>

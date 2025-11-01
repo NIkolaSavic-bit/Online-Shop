@@ -13,16 +13,19 @@ namespace BackendApp.Models
         public int ProductId { get; set; }
 
         [ForeignKey("ProductId")]
-        
+
         public virtual Product? Product { get; set; }
 
         public int Quantity { get; set; }
+
+        public string Size { get; set; } = string.Empty; // NOVO polje
+
 
         //veza sa korisnikom
         public int UserId { get; set; }
 
         [ForeignKey("UserId")]
-        
+
         public virtual User? User { get; set; }
 
     }
