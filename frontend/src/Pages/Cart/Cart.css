@@ -102,3 +102,20 @@
   color: #555;
   margin-top: 60px;
 }
+.cart-quantity {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+.cart-quantity button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10px;
+  height: 10px;
+  transform: none;
+  font-size: 30px;
+}
+

@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Mvc;
+
 public class ProductSizeDto
 {
     public string Size { get; set; } = string.Empty;
@@ -13,5 +15,8 @@ public class ProductCreateDto
     public int UserId { get; set; }
 
     public List<IFormFile> ImageFiles { get; set; } = new List<IFormFile>();
+    [FromForm]
     public List<ProductSizeDto> Sizes { get; set; } = new List<ProductSizeDto>();
+    
+
 }

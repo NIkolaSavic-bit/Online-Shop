@@ -71,12 +71,10 @@ const AddProduct = () => {
       imageFiles.forEach((file) => formToSend.append("imageFiles", file));
 
       // Veličine
-      formToSend.append(
-        "sizes",
-        JSON.stringify(
-          sizes.map((s) => ({ size: s.size, quantity: Number(s.quantity) }))
-        )
-      );
+      sizes.forEach((s, index) => {
+        formToSend.append(`Sizes[${index}].Size`, s.size);
+        formToSend.append(`Sizes[${index}].Quantity`, s.quantity);
+      });
 
       const res = await fetch("http://localhost:5145/api/products", {
         method: "POST",

@@ -25,6 +25,7 @@
   font-family: Aladin;
   flex-wrap: wrap;
 }
+
 .popular-items:hover {
   cursor: pointer;
 }
