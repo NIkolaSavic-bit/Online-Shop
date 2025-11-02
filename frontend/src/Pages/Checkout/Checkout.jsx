@@ -47,8 +47,13 @@ const Checkout = () => {
       <ul>
         {cartItem.map((item) => (
           <li key={item.id}>
-            <img src={`http://localhost:5145${item.product?.image}`} alt="" />
-            {item.product?.name} - {item.quantity} x ${item.product?.newPrice}
+            <img
+              src={`http://localhost:5145${item.product?.images[0]}`}
+              alt=""
+            />
+            {"Naziv: " + item.product?.name} - {"Velicina: " + item.size} -{" "}
+            {"Kolicina: " + item.quantity} ---
+            {"Cena po proizvodu: " + item.product?.newPrice + " $"}
           </li>
         ))}
       </ul>

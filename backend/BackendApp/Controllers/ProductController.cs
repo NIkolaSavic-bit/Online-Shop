@@ -41,13 +41,26 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet("category/{category}")]
-    public async Task<ActionResult<IEnumerable<Product>>> GetProductsByCategory(string category)
+    public async Task<ActionResult<IEnumerable<ProductReadDto>>> GetProductsByCategory(string category)
     {
         var products = await _context.Products
-            .Where(p => p.Category.ToLower() == category.ToLower())
-            .ToListAsync();
+        .Where(p => p.Category.ToLower() == category.ToLower())
+        .Include(p => p.ProductImages)
+        .Include(p => p.ProductSizes)
+        .ToListAsync();
 
-        return products;
+        var result = products.Select(p => new ProductReadDto
+        {
+            Id = p.Id,
+            Name = p.Name,
+            Category = p.Category,
+            NewPrice = p.NewPrice,
+            OldPrice = p.OldPrice,
+            Images = p.ProductImages.Select(pi => pi.ImagePath),
+            Sizes = p.ProductSizes.Select(ps => new ProductSizeDto { Size = ps.Size, Quantity = ps.Quantity })
+        });
+
+        return Ok(result);
     }
     [HttpGet("{id}")]
     public async Task<IActionResult> GetProduct(int id)
@@ -94,6 +107,7 @@ public class ProductsController : ControllerBase
         }
 
         // Dodaj veličine
+        Console.WriteLine($"Broj veličina: {dto.Sizes.Count}");
 
         foreach (var s in dto.Sizes)
         {
@@ -108,9 +122,6 @@ public class ProductsController : ControllerBase
         await _context.SaveChangesAsync();
         var test = await _context.ProductImages.Where(pi => pi.ProductId == product.Id).ToListAsync();
         Console.WriteLine($"Broj slika u bazi: {test.Count}");
-
-
-
 
         return Ok(new
         {

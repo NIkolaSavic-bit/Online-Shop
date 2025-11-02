@@ -38,7 +38,11 @@ const NewCollections = () => {
               <SwiperSlide key={item.id}>
                 <Item
                   key={item.id}
-                  image={`http://localhost:5145${item.image}`}
+                  image={
+                    item.images?.length > 0
+                      ? `http://localhost:5145${item.images[0]}`
+                      : "/placeholder.jpg"
+                  }
                   id={item.id}
                   name={item.name}
                   new_price={item.newPrice + " $"}
