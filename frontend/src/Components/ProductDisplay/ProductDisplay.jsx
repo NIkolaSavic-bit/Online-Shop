@@ -13,16 +13,20 @@ const ProductDisplay = (props) => {
   const [product, setProduct] = useState();
   const [mainImage, setMainImage] = useState("");
   //uzimamo korisnika
-  const { userId } = useContext(AuthContext);
+  const { userId, isAdmin } = useContext(AuthContext);
   const [startIndex, setStartIndex] = useState(0);
   const THUMB_WINDOW = 4;
   const [selectedSize, setSelectedSize] = useState(""); // čuva izabranu veličinu
+  const [newPriceInput, setNewPriceInput] = useState("");
+  const [newQuantities, setNewQuantities] = useState({});
 
   useEffect(() => {
     fetch(`http://localhost:5145/api/products/${productId}`)
       .then((res) => res.json())
       .then((data) => {
         setProduct(data);
+        setNewPriceInput(data.newPrice);
+
         // koristi prvu sliku iz niza kao glavnu
         if (data.productImages && data.productImages.length > 0) {
           setMainImage(
@@ -82,6 +86,82 @@ const ProductDisplay = (props) => {
     }
   };
 
+  const handlePriceChange = async () => {
+    if (!newPriceInput) return;
+
+    try {
+      const res = await fetch(
+        `http://localhost:5145/api/products/${productId}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            userId: Number(userId),
+            newPrice: Number(newPriceInput),
+          }),
+        }
+      );
+
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(text);
+      }
+
+      const data = await res.json();
+
+      setProduct((prev) => ({
+        ...prev,
+        oldPrice: data.oldPrice,
+        newPrice: data.newPrice,
+      }));
+
+      alert("Cena je uspešno promenjena");
+    } catch (err) {
+      console.error("Greška pri promeni cene:", err);
+      alert("Greška pri promeni cene: " + err.message);
+    }
+  };
+
+  const updateQuantity = async (size) => {
+    const quantity = newQuantities[size];
+    if (quantity == null) return;
+
+    try {
+      const res = await fetch(
+        `http://localhost:5145/api/products/${product.id}/quantity`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            userId: Number(userId),
+            size: size,
+            quantity: quantity,
+          }),
+        }
+      );
+
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(text);
+      }
+
+      const data = await res.json();
+
+      // Ažuriraj stanje proizvoda
+      setProduct((prev) => ({
+        ...prev,
+        productSizes: prev.productSizes.map((p) =>
+          p.size === size ? { ...p, quantity: data.quantity } : p
+        ),
+      }));
+
+      alert(`Količina za ${size} uspešno promenjena!`);
+    } catch (err) {
+      console.error("Greška pri promeni količine:", err);
+      alert("Greška pri promeni količine: " + err.message);
+    }
+  };
+
   return (
     <div className="product_display">
       <div className="product_display_left">
@@ -137,22 +217,63 @@ const ProductDisplay = (props) => {
           <h1>Odaberite velicinu</h1>
           <div className="product_display_sizes">
             {product.productSizes?.map((ps) => (
-              <button
-                key={ps.size}
-                disabled={ps.quantity === 0}
-                className={selectedSize === ps.size ? "size_selected" : ""}
-                onClick={() => setSelectedSize(ps.size)}
-              >
-                {ps.size} {ps.quantity === 0 ? "(Nema na stanju)" : ""}
-              </button>
+              <div key={ps.size} style={{ marginBottom: "10px" }}>
+                <button
+                  disabled={ps.quantity === 0}
+                  className={selectedSize === ps.size ? "size_selected" : ""}
+                  onClick={() => setSelectedSize(ps.size)}
+                >
+                  {ps.size} {ps.quantity === 0 ? "(Nema na stanju)" : ""}
+                </button>
+
+                {isAdmin && (
+                  <div style={{ marginTop: "50px" }}>
+                    <input
+                      type="number"
+                      min={0}
+                      value={newQuantities[ps.size] ?? ps.quantity}
+                      onChange={(e) =>
+                        setNewQuantities((prev) => ({
+                          ...prev,
+                          [ps.size]: Number(e.target.value),
+                        }))
+                      }
+                      style={{ width: "60px", marginRight: "5px" }}
+                    />
+                    <button onClick={() => updateQuantity(ps.size)}>
+                      Sačuvaj
+                    </button>
+                  </div>
+                )}
+              </div>
             ))}
           </div>
         </div>
+
         <div className="add_to_cart_button">
           <button onClick={handleAddToCart} disabled={!selectedSize}>
             Dodaj u korpu
           </button>
         </div>
+        {isAdmin && (
+          <div
+            style={{
+              marginTop: "20px",
+              padding: "10px",
+              border: "1px solid #ccc",
+            }}
+          >
+            <h3>Promeni cenu proizvoda</h3>
+            <input
+              type="number"
+              placeholder="Nova cena"
+              value={newPriceInput}
+              onChange={(e) => setNewPriceInput(e.target.value)}
+              style={{ padding: "8px", marginRight: "10px" }}
+            />
+            <button onClick={handlePriceChange}>Sačuvaj</button>
+          </div>
+        )}
         <p className="product_category">
           <span>Kategorija: </span>Women, T-shirt
         </p>

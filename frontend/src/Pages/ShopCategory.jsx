@@ -44,19 +44,31 @@ const ShopCategory = (props) => {
       </div>
       <div className="shop-category-products">
         {visibleProducts.map((item) => {
+          
+          const isUnavailable =
+            item.sizes?.every((s) => s.quantity === 0) || !item.sizes;
+
           return (
-            <Item
+            <div
               key={item.id}
-              id={item.id}
-              image={
-                item.images?.length > 0
-                  ? `http://localhost:5145${item.images[0]}`
-                  : "/placeholder.jpg"
-              }
-              name={item.name}
-              new_price={item.newPrice + " $"}
-              old_price={item.oldPrice + " $"}
-            />
+              className={isUnavailable ? "item_unavailable" : ""}
+              style={{ position: "relative" }}
+            >
+              <Item
+                id={item.id}
+                image={
+                  item.images?.length > 0
+                    ? `http://localhost:5145${item.images[0]}`
+                    : "/placeholder.jpg"
+                }
+                name={item.name}
+                new_price={item.newPrice + " $"}
+                old_price={item.oldPrice + " $"}
+              />
+              {isUnavailable && (
+                <div className="item_unavailable_text">Nema na stanju</div>
+              )}
+            </div>
           );
         })}
       </div>

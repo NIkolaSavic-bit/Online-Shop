@@ -44,3 +44,18 @@
   object-fit: fill;
   border-radius: 15px;
 }
+.item_unavailable {
+  opacity: 0.7;
+  filter: blur(0.5px);
+  position: relative;
+}
+
+.item_unavailable_text {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  color: red;
+  font-weight: bold;
+}

@@ -71,9 +71,8 @@ const User = () => {
           {cartProducts.map((item) => (
             <li key={item.id}>
               <img
-                src={`http://localhost:5145${item.product.image}`}
+                src={`http://localhost:5145${item.product.images[0]}`}
                 alt="Loading image...."
-               
               />
               {item.product.name} - ${item.product.newPrice} (Količina:{" "}
               {item.quantity})

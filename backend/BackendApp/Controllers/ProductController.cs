@@ -161,5 +161,66 @@ public class ProductsController : ControllerBase
         return Ok(product.ProductImages.Select(pi => pi.ImagePath));
     }
 
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdatePrice(int id, [FromBody] UpdatePrice updatePrice)
+    {
+        var product = await _context.Products.FindAsync(id);
+        var user = await _context.Users.FindAsync(updatePrice.UserId);
+        if (user == null || !user.IsAdmin)
+        {
+            return Unauthorized("Samo admin moze da menja cenu prozvoda");
+        }
+
+        if (product == null)
+        {
+            return NotFound("Proizvod nije pronadjen!");
+        }
+        product.OldPrice = product.NewPrice;
+
+        product.NewPrice = updatePrice.NewPrice;
+
+        await _context.SaveChangesAsync();
+
+        return Ok(new
+        {
+            message = "Cena je uspesno promenjena",
+            id = product.Id,
+            oldPrice = product.OldPrice,
+            newPrice = product.NewPrice
+        });
+    }
+
+    [HttpPut("{id}/quantity")]
+    public async Task<IActionResult> UpdateQuantity(int id, [FromBody] UpdateQuantityDTO dto)
+    {
+        var product = await _context.Products
+            .Include(p => p.ProductSizes)
+            .FirstOrDefaultAsync(p => p.Id == id);
+
+        var user = await _context.Users.FindAsync(dto.UserId);
+
+        if (user == null || !user.IsAdmin)
+            return Unauthorized("Samo admin moze da menja kolicinu proizvoda");
+
+        if (product == null)
+            return NotFound("Proizvod nije pronadjen!");
+
+        // Pronađi veličinu koju admin želi da menja
+        var productSize = product.ProductSizes.FirstOrDefault(ps => ps.Size == dto.Size);
+        if (productSize == null)
+            return NotFound("Ova veličina nije pronađena za proizvod");
+
+        productSize.Quantity = dto.Quantity;
+
+        await _context.SaveChangesAsync();
+
+        return Ok(new
+        {
+            message = "Količina uspešno promenjena",
+            productId = product.Id,
+            size = productSize.Size,
+            quantity = productSize.Quantity
+        });
+    }
 
 }
