@@ -73,3 +73,12 @@
 .add-product-btn:hover {
   background-color: #218838;
 }
+.nav-search{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nav-search input{
+  border-radius: 10px;
+  font-size: 15px;
+}

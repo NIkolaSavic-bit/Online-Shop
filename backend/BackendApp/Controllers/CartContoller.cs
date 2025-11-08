@@ -88,8 +88,19 @@ namespace BackendApp.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> RemoveFromCart(int id)
         {
-            var item = await _context.CartItems.FindAsync(id);
+            var item = await _context.CartItems
+         .Include(c => c.Product)
+         .ThenInclude(p => p.ProductSizes)
+         .FirstOrDefaultAsync(c => c.Id == id);
+
             if (item == null) return NotFound();
+
+            // Vrati količinu nazad u ProductSizes
+            var productSize = item.Product.ProductSizes.FirstOrDefault(ps => ps.Size == item.Size);
+            if (productSize != null)
+            {
+                productSize.Quantity += item.Quantity;
+            }
 
             _context.CartItems.Remove(item);
             await _context.SaveChangesAsync();

@@ -18,7 +18,7 @@ namespace BackendApp.Models
 
         public int Quantity { get; set; }
 
-        public string Size { get; set; } = string.Empty; // NOVO polje
+        public string Size { get; set; } = string.Empty; 
 
 
         //veza sa korisnikom
