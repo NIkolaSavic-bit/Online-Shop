@@ -263,6 +263,35 @@ public class ProductsController : ControllerBase
         });
     }
 
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteProduct(int id, [FromQuery] int userId)
+    {
+        // provjera admina
+        var user = await _context.Users.FindAsync(userId);
+        if (user == null || !user.IsAdmin)
+            return Unauthorized("Samo admin moze da brise proizvode.");
+
+        // ucitaj kompletan product
+        var product = await _context.Products
+            .Include(p => p.ProductImages)
+            .Include(p => p.ProductSizes)
+            .FirstOrDefaultAsync(p => p.Id == id);
+
+        if (product == null)
+            return NotFound("Proizvod nije pronadjen.");
+
+        // obriši slike sa diska
+        foreach (var img in product.ProductImages)
+        {
+            _imageService.DeleteImage(img.ImagePath); // napravi ovu metodu u ImageService
+        }
+
+        // obriši product
+        _context.Products.Remove(product);
+        await _context.SaveChangesAsync();
+
+        return Ok(new { message = "Proizvod uspjesno obrisan." });
+    }
 
 
 }

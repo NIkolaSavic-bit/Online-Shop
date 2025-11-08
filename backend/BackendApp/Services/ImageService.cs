@@ -31,5 +31,12 @@ namespace BackendApp.Services
             // vraćamo RELATIVNI path (za frontend)
             return "/images/" + uniqueFileName;
         }
+
+        public void DeleteImage(string path)
+        {
+            var fullPath = Path.Combine("wwwroot", path);
+            if (File.Exists(fullPath))
+                File.Delete(fullPath);
+        }
     }
 }

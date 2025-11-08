@@ -162,6 +162,31 @@ const ProductDisplay = (props) => {
     }
   };
 
+  const handleDeleteProduct = async () => {
+    if (!window.confirm("Da li si siguran da želiš da obrišeš ovaj proizvod?"))
+      return;
+
+    try {
+      const res = await fetch(
+        `http://localhost:5145/api/products/${productId}?userId=${userId}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(text);
+      }
+
+      alert("Proizvod uspešno obrisan!");
+      window.location.href = "/"; // redirect na home (ili kategoriju)
+    } catch (err) {
+      console.error("Greška pri brisanju:", err);
+      alert("Greška pri brisanju: " + err.message);
+    }
+  };
+
   return (
     <div className="product_display">
       <div className="product_display_left">
@@ -217,37 +242,39 @@ const ProductDisplay = (props) => {
           <h1>Odaberite velicinu</h1>
           <div className="product_display_sizes">
             {product.productSizes?.map((ps) => (
-              <div key={ps.size} style={{ marginBottom: "10px" }}>
-                <button
-                  disabled={ps.quantity === 0}
-                  className={selectedSize === ps.size ? "size_selected" : ""}
-                  onClick={() => setSelectedSize(ps.size)}
-                >
-                  {ps.size} {ps.quantity === 0 ? "(Nema na stanju)" : ""}
-                </button>
-
-                {isAdmin && (
-                  <div style={{ marginTop: "50px" }}>
-                    <input
-                      type="number"
-                      min={0}
-                      value={newQuantities[ps.size] ?? ps.quantity}
-                      onChange={(e) =>
-                        setNewQuantities((prev) => ({
-                          ...prev,
-                          [ps.size]: Number(e.target.value),
-                        }))
-                      }
-                      style={{ width: "60px", marginRight: "5px" }}
-                    />
-                    <button onClick={() => updateQuantity(ps.size)}>
-                      Sačuvaj
-                    </button>
-                  </div>
-                )}
-              </div>
+              <button
+                key={ps.size}
+                disabled={ps.quantity === 0}
+                className={selectedSize === ps.size ? "size_selected" : ""}
+                onClick={() => setSelectedSize(ps.size)}
+              >
+                {ps.size} {ps.quantity === 0 ? "(Nema na stanju)" : ""}
+              </button>
             ))}
           </div>
+          {isAdmin && (
+            <div className="admin_sizes_edit">
+              {product.productSizes?.map((ps) => (
+                <div key={ps.size} className="admin_size_row">
+                  <span>{ps.size}</span>
+                  <input
+                    type="number"
+                    min={0}
+                    value={newQuantities[ps.size] ?? ps.quantity}
+                    onChange={(e) =>
+                      setNewQuantities((p) => ({
+                        ...p,
+                        [ps.size]: Number(e.target.value),
+                      }))
+                    }
+                  />
+                  <button onClick={() => updateQuantity(ps.size)}>
+                    Sačuvaj
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="add_to_cart_button">
@@ -272,6 +299,17 @@ const ProductDisplay = (props) => {
               style={{ padding: "8px", marginRight: "10px" }}
             />
             <button onClick={handlePriceChange}>Sačuvaj</button>
+            <button
+              style={{
+                marginTop: "20px",
+                background: "red",
+                color: "white",
+                padding: "10px",
+              }}
+              onClick={handleDeleteProduct}
+            >
+              OBRIŠI PROIZVOD
+            </button>
           </div>
         )}
         <p className="product_category">
