@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
 import "./Navbar.css";
@@ -7,12 +7,20 @@ import cart_icon from "../Assets/cart_icon.png";
 import { CiUser } from "react-icons/ci";
 import { useCart } from "../../Context/CartContext";
 
-
 const Navbar = () => {
   const [menu, setMenu] = useState("shop");
+  const [searchQuery, setSearchQuery] = useState(""); // ← state za search
   const { userId, logout, isAdmin } = useContext(AuthContext);
   const navigate = useNavigate();
   const { cartCount } = useCart();
+
+  // ← handler za pretragu
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim() === "") return;
+    navigate(`/search?query=${encodeURIComponent(searchQuery.trim())}`);
+    setSearchQuery(""); // reset input
+  };
 
   return (
     <div className="navbar">
@@ -50,8 +58,18 @@ const Navbar = () => {
         </li>
       </ul>
 
+      {/* ← Forma za search */}
+      <form className="nav-search" onSubmit={handleSearch}>
+        <input
+          type="text"
+          placeholder="Search products..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <button type="submit">Search</button>
+      </form>
+
       <div className="nav-login-cart">
-        {/* Dugme za admin AddProduct */}
         {isAdmin && (
           <button
             className="add-product-btn"

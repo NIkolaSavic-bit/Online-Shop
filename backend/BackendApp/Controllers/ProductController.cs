@@ -41,13 +41,52 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet("category/{category}")]
-    public async Task<ActionResult<IEnumerable<ProductReadDto>>> GetProductsByCategory(string category)
+    public async Task<ActionResult<IEnumerable<ProductReadDto>>> GetProductsByCategory(string category, [FromQuery] string sort = "")
     {
+        var productsQuery = _context.Products
+            .Where(p => p.Category.ToLower() == category.ToLower())
+            .Include(p => p.ProductImages)
+            .Include(p => p.ProductSizes)
+            .AsQueryable();
+
+
+        productsQuery = sort.ToLower() switch
+        {
+            "price_asc" => productsQuery.OrderBy(p => p.NewPrice),
+            "price_desc" => productsQuery.OrderByDescending(p => p.NewPrice),
+            "date_asc" => productsQuery.OrderBy(p => p.CreatedAt),
+            "date_desc" => productsQuery.OrderByDescending(p => p.CreatedAt),
+            _ => productsQuery
+        };
+
+        var products = await productsQuery.ToListAsync();
+
+        var result = products.Select(p => new ProductReadDto
+        {
+            Id = p.Id,
+            Name = p.Name,
+            Category = p.Category,
+            NewPrice = p.NewPrice,
+            OldPrice = p.OldPrice,
+            CreatedAt = p.CreatedAt,
+            Images = p.ProductImages.Select(pi => pi.ImagePath),
+            Sizes = p.ProductSizes.Select(ps => new ProductSizeDto { Size = ps.Size, Quantity = ps.Quantity })
+        });
+
+        return Ok(result);
+    }
+
+    [HttpGet("search")]
+    public async Task<ActionResult<IEnumerable<ProductReadDto>>> SearchProducts([FromQuery] string name)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+            return BadRequest("Query parameter 'name' is required.");
+
         var products = await _context.Products
-        .Where(p => p.Category.ToLower() == category.ToLower())
-        .Include(p => p.ProductImages)
-        .Include(p => p.ProductSizes)
-        .ToListAsync();
+            .Where(p => p.Name.ToLower().Contains(name.ToLower()))
+            .Include(p => p.ProductImages)
+            .Include(p => p.ProductSizes)
+            .ToListAsync();
 
         var result = products.Select(p => new ProductReadDto
         {
@@ -62,6 +101,7 @@ public class ProductsController : ControllerBase
 
         return Ok(result);
     }
+
     [HttpGet("{id}")]
     public async Task<IActionResult> GetProduct(int id)
     {
@@ -222,5 +262,7 @@ public class ProductsController : ControllerBase
             quantity = productSize.Quantity
         });
     }
+
+
 
 }

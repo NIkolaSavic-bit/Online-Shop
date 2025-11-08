@@ -16,6 +16,8 @@ import Contact from "./Components/Footer/Footer-Text/Contact.jsx";
 import About from "./Components/Footer/Footer-Text/About.jsx";
 import Offices from "./Components/Footer/Footer-Text/Offices.jsx";
 
+import SearchResults from "./Components/Navbar/SearchResults/SearchResults.jsx";
+
 // **Importuj AuthProvider**
 import { AuthProvider } from "./Context/AuthContext.jsx";
 import { CartProvider } from "./Context/CartContext.jsx";
@@ -54,6 +56,7 @@ function App() {
             <Route path="/user" element={<User />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/add-product" element={<AddProduct />} />
+            <Route path="/search" element={<SearchResults />} />
           </Routes>
           <Footer />
         </BrowserRouter>

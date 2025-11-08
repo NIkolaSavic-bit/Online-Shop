@@ -38,8 +38,8 @@
 }
 
 .cart-item-image {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 140px;
   object-fit: cover;
   border-radius: 10px;
 }
