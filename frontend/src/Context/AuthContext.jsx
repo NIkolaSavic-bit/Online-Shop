@@ -1,10 +1,12 @@
 import React, { createContext, useState, useEffect } from "react";
+import { useBannerTimer } from "../hooks/useBannerTime";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [userId, setUserId] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
+  const timeLeft = useBannerTimer();
 
   // pri mount-u proveri localStorage
   useEffect(() => {
@@ -29,7 +31,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ userId, isAdmin, login, logout }}>
+    <AuthContext.Provider value={{ userId, isAdmin, login, logout, timeLeft }}>
       {children}
     </AuthContext.Provider>
   );

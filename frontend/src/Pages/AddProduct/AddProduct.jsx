@@ -5,12 +5,15 @@ import "./AddProduct.css";
 const AddProduct = () => {
   const { userId } = useContext(AuthContext);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [imagePreviews, setImagePreviews] = useState([]);
+
   const [formData, setFormData] = useState({
     name: "",
     category: "",
     newPrice: "",
     oldPrice: "",
   });
+
   const [sizes, setSizes] = useState([{ size: "", quantity: "" }]); // niz veličina
   const [imageFiles, setImageFiles] = useState([]);
   const [message, setMessage] = useState("");
@@ -49,7 +52,12 @@ const AddProduct = () => {
   };
 
   const handleFileChange = (e) => {
-    setImageFiles(Array.from(e.target.files)); // pretvori FileList u niz
+    const files = Array.from(e.target.files);
+    setImageFiles(files);
+
+    // Generiši preview URL-eve
+    const previews = files.map((file) => URL.createObjectURL(file));
+    setImagePreviews(previews);
   };
 
   const handleSubmit = async (e) => {
@@ -100,6 +108,16 @@ const AddProduct = () => {
     return <p>Morate biti prijavljeni da biste dodavali proizvode.</p>;
   if (!isAdmin) return <p>Samo administrator može dodavati proizvode.</p>;
 
+  const removeImage = (index) => {
+    const newFiles = [...imageFiles];
+    newFiles.splice(index, 1);
+    setImageFiles(newFiles);
+
+    const newPreviews = [...imagePreviews];
+    newPreviews.splice(index, 1);
+    setImagePreviews(newPreviews);
+  };
+
   return (
     <div className="add-product-container">
       <h2 className="add-product-title">Dodaj novi proizvod</h2>
@@ -134,6 +152,7 @@ const AddProduct = () => {
           placeholder="Stara cijena"
           value={formData.oldPrice}
           onChange={handleChange}
+          
         />
 
         <h3>Veličine i količine</h3>
@@ -173,6 +192,24 @@ const AddProduct = () => {
           onChange={handleFileChange}
           required
         />
+        <div className="image-preview-container">
+          {imagePreviews.map((src, index) => (
+            <div key={index} className="preview-wrapper">
+              <img
+                src={src}
+                alt={`Preview ${index}`}
+                className="image-preview"
+              />
+              <button
+                type="button"
+                className="remove-image-btn"
+                onClick={() => removeImage(index)}
+              >
+                X
+              </button>
+            </div>
+          ))}
+        </div>
         <button type="submit">Dodaj proizvod</button>
       </form>
       {message && <p className="add-product-message">{message}</p>}
