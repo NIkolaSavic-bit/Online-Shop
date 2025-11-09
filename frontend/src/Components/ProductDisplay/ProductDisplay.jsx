@@ -180,7 +180,7 @@ const ProductDisplay = (props) => {
       }
 
       alert("Proizvod uspešno obrisan!");
-      window.location.href = "/"; // redirect na home (ili kategoriju)
+      window.location.href = "/";
     } catch (err) {
       console.error("Greška pri brisanju:", err);
       alert("Greška pri brisanju: " + err.message);

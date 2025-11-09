@@ -9,8 +9,9 @@
   justify-content: space-between;
   padding: 20px 40px 10px 40px;
 }
-/* .shop-category-sort {
+.shop-category-sort {
   border: 1px solid #888;
+  font-size: 15px;
   border-radius: 20px;
   padding: 10px 20px;
 }
@@ -19,7 +20,7 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   transform: scale(1.05);
   transition: all 0.3s ease-in-out;
-} */
+} 
 .shop-category-products {
   display: flex;
   flex-wrap: wrap;
@@ -39,8 +40,8 @@
 }
 .shop-category-products img {
   width: 100%;
-  max-width: 250px;
-  height: 250px;
+  max-width: 300px;
+  height: 300px;
   object-fit: fill;
   border-radius: 15px;
 }

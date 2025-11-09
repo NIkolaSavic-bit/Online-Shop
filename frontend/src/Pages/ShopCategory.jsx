@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./CSS/ShopCategory.css";
 import Item from "../Components/Items/Item";
+import Banner from "../Banner/Banner";
 
 const ShopCategory = (props) => {
   const [products, setProducts] = useState([]);
-  const [visibleProductsCount, setVisibleProductsCount] = useState(6);
+  const [visibleProductsCount, setVisibleProductsCount] = useState(4);
   const [sortOption, setSortOption] = useState("");
 
   const fetchProducts = async () => {
@@ -26,7 +27,7 @@ const ShopCategory = (props) => {
   const visibleProducts = products.slice(0, visibleProductsCount);
 
   const handleLoadMore = () => {
-    setVisibleProductsCount((prev) => prev + 6);
+    setVisibleProductsCount((prev) => prev + 4);
   };
 
   // Pronađi najnoviji proizvod po createdAt
@@ -36,9 +37,13 @@ const ShopCategory = (props) => {
       ).id
     : null;
 
+  function isNewProduct(createdAt) {
+    return Date.now() - new Date(createdAt).getTime() <= 24 * 60 * 60 * 1000;
+  }
+
   return (
     <div className="shop-category">
-      <img className="shop-category-banner" src={props.banner} alt="" />
+      <Banner category={props.category} />
       <div className="shop-category-indexSort">
         <p>
           <span>Showing {visibleProducts.length} </span>
@@ -62,7 +67,7 @@ const ShopCategory = (props) => {
         {visibleProducts.map((item) => {
           const isUnavailable =
             item.sizes?.every((s) => s.quantity === 0) || !item.sizes;
-          const isNewest = item.id === newestProductId;
+          const isNew = isNewProduct(item.createdAt);
 
           return (
             <div
@@ -84,7 +89,7 @@ const ShopCategory = (props) => {
               {isUnavailable && (
                 <div className="item_unavailable_text">Nema na stanju</div>
               )}
-              {isNewest && <div className="item_new_text">NOVO</div>}
+              {isNew && <div className="item_new_text">NOVO</div>}
             </div>
           );
         })}

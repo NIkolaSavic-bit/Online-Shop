@@ -56,7 +56,7 @@ public class ProductsController : ControllerBase
             "price_desc" => productsQuery.OrderByDescending(p => p.NewPrice),
             "date_asc" => productsQuery.OrderBy(p => p.CreatedAt),
             "date_desc" => productsQuery.OrderByDescending(p => p.CreatedAt),
-            _ => productsQuery
+            _ => productsQuery.OrderByDescending(p=>p.CreatedAt)
         };
 
         var products = await productsQuery.ToListAsync();
